@@ -17,6 +17,7 @@ export const myCompSchema = z.object({
   titleColor: zColor(),
   logoColor1: zColor(),
   logoColor2: zColor(),
+  name: z.string().nullable(),
 });
 
 export const HelloWorld: React.FC<z.infer<typeof myCompSchema>> = ({
@@ -24,6 +25,7 @@ export const HelloWorld: React.FC<z.infer<typeof myCompSchema>> = ({
   titleColor: propTwo,
   logoColor1,
   logoColor2,
+  name,
 }) => {
   const frame = useCurrentFrame();
   const { durationInFrames, fps } = useVideoConfig();
@@ -64,7 +66,7 @@ export const HelloWorld: React.FC<z.infer<typeof myCompSchema>> = ({
         </AbsoluteFill>
         {/* Sequences can shift the time for its children! */}
         <Sequence from={35}>
-          <Title titleText={propOne} titleColor={propTwo} />
+          <Title titleText={name || ""} titleColor={propTwo} />
         </Sequence>
         {/* The subtitle will only enter on the 75th frame. */}
         <Sequence from={75}>
